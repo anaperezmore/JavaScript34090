@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.hero{
+    height: 100vh;
+    background-image: url(../img/pexels-photo-1283219.jpeg);
+    background-size: cover;
+    color: white;  
+}
+.hero_header{
+display: flex;
+justify-content:space-between;
+padding-top: 2rem;
+padding-inline: 1rem;
+
+}
+
