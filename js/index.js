@@ -7,14 +7,14 @@ if (edad >= 18) {
 let edades;
 
 while (edades != "PASE NOMAS") {
-    let edad = prompt("Hola! Ingresa tu edad");
-if (edad >= 18) {
-  alert("Sos mayor de edad. Podés ingresar")
-  edades = "PASE NOMAS"
-} else {
-  alert("Sos menor de edad. No podés ingresar")
-  edades = "NO PASA NADA"
-}
+  let edad = prompt("Hola! Ingresa tu edad");
+  if (edad >= 18) {
+    alert("Sos mayor de edad. Podés ingresar")
+    edades = "PASE NOMAS"
+  } else {
+    alert("Sos menor de edad. No podés ingresar")
+    edades = "NO PASA NADA"
+  }
 }
 
 
@@ -149,6 +149,82 @@ while (comprar != "6") {
   }
 }
 
+/*array, objetos, metodo*/
+const productosArray = [{
+    id: "vinos-01",
+    titulo: "Vino tinto",
+    precio: 3200
+  },
+  {
+    id: "vinos-01",
+    titulo: "Vino rose",
+    precio: 3200
+
+  },
+  {
+    id: "vinos-01",
+    titulo: "Vino blanco",
+    precio: 3200
+
+  },
+  {
+    id: "destilados-01",
+    titulo: "destilado 01",
+    precio: 9000
+
+  },
+  {
+    id: "cervezas-01",
+    titulo: "cerveza golden",
+    precio: 2000
+
+  },
+  {
+    id: "cervezas-01",
+    titulo: "cerveza Ipa",
+    precio: 2000
+
+  },
+  {
+    id: "cervezas-01",
+    titulo: "cerveza Roja",
+    precio: 2000
+
+  },
+  {
+    id: "cervezas-01",
+    titulo: "cerveza stout",
+    precio: 2000
+
+  },
+  {
+    id: "espumantes-01",
+    titulo: "espumante 01",
+    precio: 8000
+
+  },
+  {
+    id: "aperitivos-01",
+    titulo: "fernet",
+    precio: 6500
+
+  },
+  {
+    id: "aperitivos-01",
+    titulo: "Campari",
+    precio: 6500
+
+  },
+  {
+    id: "aperitivos-01",
+    titulo: "Gancia",
+    precio: 6500
+
+  },
+];
+productosArray.forEach((titulo) =>{
+  console.log(titulo);
+})
 
 /* ESTRUCTURA FUNCION 
 function calculadora(numero1, numero2, operacion) {
