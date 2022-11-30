@@ -150,81 +150,245 @@ while (comprar != "6") {
 }
 
 /*array, objetos, metodo*/
-const productosArray = [{
-    id: "vinos-01",
+const productos = [{
+    id: "vino-01",
     titulo: "Vino tinto",
-    precio: 3200
+    imagen:"./img/vino01.jpg",
+    precio: 3200,
   },
   {
-    id: "vinos-01",
+    id: "vino-01",
     titulo: "Vino rose",
+    imagen: "./img/rose01.png",
     precio: 3200
 
   },
   {
-    id: "vinos-01",
+    id: "vino-01",
     titulo: "Vino blanco",
+    imagen: "./img/blanco01.jpg",
     precio: 3200
 
   },
   {
-    id: "destilados-01",
+    id: "destilado-01",
     titulo: "destilado 01",
+    imagen: "./img/whisky01.jpg",
     precio: 9000
 
   },
   {
-    id: "cervezas-01",
+    id: "cerveza-01",
     titulo: "cerveza golden",
-    precio: 2000
+    precio: 2000,
+    imagen: "./img/cerveza01.jpg"
+
 
   },
   {
-    id: "cervezas-01",
+    id: "cerveza-01",
     titulo: "cerveza Ipa",
+    imagen:"./img/cerveza02.jpg",
     precio: 2000
 
   },
   {
     id: "cervezas-01",
     titulo: "cerveza Roja",
+    imagen:"./img/patagonia.jpg",
     precio: 2000
 
   },
   {
     id: "cervezas-01",
     titulo: "cerveza stout",
+    imagen: "./img/Stout01.png",
     precio: 2000
 
   },
   {
     id: "espumantes-01",
     titulo: "espumante 01",
+    imagen:"./img/espumante01.jpg",
     precio: 8000
 
   },
   {
     id: "aperitivos-01",
     titulo: "fernet",
+    imagen:"./img/Fernet01.jpg",
     precio: 6500
 
   },
   {
     id: "aperitivos-01",
     titulo: "Campari",
-    precio: 6500
-
-  },
-  {
-    id: "aperitivos-01",
-    titulo: "Gancia",
+    imagen:"./img/aperitivo01.jpg",
     precio: 6500
 
   },
 ];
-productosArray.forEach((titulo) =>{
+
+const contenedorProductos = document.querySelector("#contenedor-productos");
+const tituloPrincipal = document.querySelector("#titulo-principal");
+let botonesAgregar = document.querySelectorAll(".producto-agregar");
+const numerito = document.querySelector("#numerito");
+
+
+function cargarProductos(productosElegidos) {
+
+    contenedorProductos.innerHTML = "";
+
+    productosElegidos.forEach(producto => {
+
+        const div = document.createElement("div");
+        div.classList.add("producto");
+        div.innerHTML = `
+            <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+            <div class="producto-detalles">
+                <h3 class="producto-titulo">${producto.titulo}</h3>
+                <p class="producto-precio">$${producto.precio}</p>
+                <button class="producto-agregar" id="${producto.id}">Agregar</button>
+            </div>
+        `;
+
+        contenedorProductos.append(div);
+    })
+
+    actualizarBotonesAgregar();
+}
+
+cargarProductos(productos);
+botonesCategorias.forEach(boton => {
+  boton.addEventListener("click", (e) => {
+
+      botonesCategorias.forEach(boton => boton.classList.remove("active"));
+      e.currentTarget.classList.add("active");
+
+      if (e.currentTarget.id != "todos") {
+          const productoCategoria = productos.find(producto => producto.categoria.id === e.currentTarget.id);
+          tituloPrincipal.innerText = productoCategoria.categoria.nombre;
+          const productosBoton = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
+          cargarProductos(productosBoton);
+      } else {
+          tituloPrincipal.innerText = "Todos los productos";
+          cargarProductos(productos);
+      }
+
+  })
+});
+
+function actualizarBotonesAgregar() {
+  botonesAgregar = document.querySelectorAll(".producto-agregar");
+
+  botonesAgregar.forEach(boton => {
+      boton.addEventListener("click", agregarAlCarrito);
+  });
+}
+
+let productosEnCarrito;
+
+let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
+
+if (productosEnCarritoLS) {
+  productosEnCarrito = JSON.parse(productosEnCarritoLS);
+  actualizarNumerito();
+} else {
+  productosEnCarrito = [];
+}
+
+function agregarAlCarrito(e) {
+  const idBoton = e.currentTarget.id;
+  const productoAgregado = productos.find(producto => producto.id === idBoton);
+
+  if(productosEnCarrito.some(producto => producto.id === idBoton)) {
+      const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
+      productosEnCarrito[index].cantidad++;
+  } else {
+      productoAgregado.cantidad = 1;
+      productosEnCarrito.push(productoAgregado);
+  }
+
+  actualizarNumerito();
+
+  localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+}
+
+function actualizarNumerito() {
+  let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
+  numerito.innerText = nuevoNumerito;
+}
+/*
+productos.forEach((titulo) =>{
   console.log(titulo);
 })
+//agregar productos a favoritos//
+const agregarFav = (id) => {
+  let favoritosAlmacenados = JSON.parse(localStorage.getItem("favguardado"));
+  let agregado = producto.find((item) => item.id == id);
+  let compruebo = false;
+
+  if (favoritosAlmacenados) {
+    favoritosAlmacenados.find((item) => {
+      if (item.id == id) {
+        compruebo = true;
+      } else {
+        compruebo = false;
+      }
+    });
+    if (compruebo) {
+      alert("Este producto ya fue agregado a favoritos antes");
+    } else {
+      let nuevosFavs = favoritosAlmacenados;
+      nuevosFavs.push(agregado);
+      localStorage.setItem("favguardado", JSON.stringify(nuevosFavs));
+      alert("Se agrego un nuevo favorito");
+    }
+  } else {
+    let favorito = [agregado];
+    localStorage.setItem("favguardado", JSON.stringify(favorito));
+    alert("Se agrego un nuevo favorito");
+  }
+};
+//agregar productos al carrito//
+const agregarCarrito = (id) => {
+  let carritoAlmacenado = JSON.parse(localStorage.getItem("carritoguardado"));
+  let carrito = producto.find((item) => item.id == id);
+  let carrinuevo = false;
+
+  // Almaceno el carrito//
+  if (carritoAlmacenado) {
+    carritoAlmacenado.find((item) => {
+      if (item.id == id) {
+        carrinuevo = true;
+      } else {
+        carrinuevo = false;
+      }
+    });
+    if (carrinuevo) {
+      alert("Este producto ya fue agregado al carrito antes");
+    } else {
+      let nuevocarri = carritoAlmacenado;
+      nuevocarri.push(carrito);
+      localStorage.setItem("carritoguardado", JSON.stringify(nuevocarri));
+
+      alert("Se agrego un nuevo producto");
+    }
+  } else {
+    let carri = [carrito];
+    localStorage.setItem("carritoguardado", JSON.stringify(carri));
+    alert("Se agrego un nuevo Producto");
+  }
+};
+//esperamos eventos y llamamos la funcion
+fav.addEventListener("click", () => {
+  agregarFav(item.id);
+});
+
+car.addEventListener("click", () => {
+  agregarCarrito(item.id);
+});
+
 
 /* ESTRUCTURA FUNCION 
 function calculadora(numero1, numero2, operacion) {
