@@ -38,7 +38,7 @@ h2 {
 aside {
     padding: 2rem;
     padding-right: 0;
-    color: var(--clr-white);
+    color: white;
     position: sticky;
     top: 0;
     height: 100vh;
@@ -61,7 +61,7 @@ aside {
 .boton-menu {
     background-color: transparent;
     border: 0;
-    color: var(--clr-white);
+    color: white;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -73,8 +73,8 @@ aside {
 }
 
 .boton-menu.active {
-    background-color: var(--clr-white);
-    color: var(--clr-main);
+    background-color: white;
+    color: black;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     position: relative;
@@ -89,7 +89,7 @@ aside {
     right: 0;
     background-color: transparent;
     border-bottom-right-radius: .5rem;
-    box-shadow: 0 1rem 0 var(--clr-white);
+    box-shadow: 0 1rem 0 white;
 }
 
 .boton-menu.active::after {
@@ -101,7 +101,7 @@ aside {
     right: 0;
     background-color: transparent;
     border-top-right-radius: .5rem;
-    box-shadow: 0 -1rem 0 var(--clr-white);
+    box-shadow: 0 -1rem 0 white;
 }
 
 .boton-menu > i.bi-hand-index-thumb-fill,
@@ -114,8 +114,8 @@ aside {
 }
 
 .numerito {
-    background-color: var(--clr-white);
-    color: var(--clr-main);
+    background-color: white;
+    color: black;
     padding: .15rem .25rem;
     border-radius: .25rem;
 }
