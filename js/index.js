@@ -43,6 +43,26 @@ switch (ofertaDiaDeLaSemana) {
     break;
 
 }
+(async () => {
+
+  const { value: accept } = await Swal.fire({
+    title: 'Terminos y condiciones',
+    input: 'checkbox',
+    inputValue: 1,
+    inputPlaceholder:
+      'Estoy de acuerdo con los terminos y condiciones',
+    confirmButtonText:
+      'Continuar <i class="fa fa-arrow-right"></i>',
+    inputValidator: (result) => {
+      return !result && 'Tienes que estar de acuerdo con T&C'
+    }
+  })
+  
+  if (accept) {
+    Swal.fire('Usted estuvo de acuerdo con T&C :)')
+  }
+  
+  })()
 
 let nombre;
 
@@ -230,6 +250,7 @@ const productos = [{
 ];
 
 const contenedorProductos = document.querySelector("#contenedor-productos");
+const botonesCategorias = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal");
 let botonesAgregar = document.querySelectorAll(".producto-agregar");
 const numerito = document.querySelector("#numerito");
