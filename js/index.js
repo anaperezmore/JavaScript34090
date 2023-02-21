@@ -17,7 +17,7 @@ while (edades != "PASE NOMAS") {
   }
 }
 
-
+/*
 let ofertaDiaDeLaSemana = Number(prompt("ingrese el dia de la semana en números"));
 switch (ofertaDiaDeLaSemana) {
   case 1:
@@ -42,7 +42,7 @@ switch (ofertaDiaDeLaSemana) {
     alert("Domingo. 10% en el total de la compra");
     break;
 
-}
+}*/
 (async () => {
 
   const { value: accept } = await Swal.fire({
@@ -63,7 +63,7 @@ switch (ofertaDiaDeLaSemana) {
   }
   
   })()
-
+/*
 let nombre;
 
 function solicitarNombre() {
@@ -170,23 +170,35 @@ while (comprar != "6") {
 }
 
 /*array, objetos, metodo*/
-const productos = [{
+/*const productos = [{
     id: "vino-01",
     titulo: "Vino tinto",
     imagen:"./img/vino01.jpg",
+    categoria:{
+      nombre:"Vinos",
+      id:"Vinos"
+    },
     precio: 3200,
   },
   {
-    id: "vino-01",
+    id: "vino-02",
     titulo: "Vino rose",
     imagen: "./img/rose01.png",
+    categoria:{
+      nombre:"Vinos",
+      id:"Vinos"
+    },
     precio: 3200
 
   },
   {
-    id: "vino-01",
+    id: "vino-03",
     titulo: "Vino blanco",
     imagen: "./img/blanco01.jpg",
+    categoria:{
+      nombre:"Vinos",
+      id:"Vinos"
+    },
     precio: 3200
 
   },
@@ -194,60 +206,93 @@ const productos = [{
     id: "destilado-01",
     titulo: "destilado 01",
     imagen: "./img/whisky01.jpg",
+    categoria:{
+      nombre:"Destilados",
+      id:"Destilados"
+    },
     precio: 9000
-
   },
   {
     id: "cerveza-01",
     titulo: "cerveza golden",
+    imagen: "./img/cerveza01.jpg",
+    categoria:{
+      nombre:"Cervezas",
+      id:"Cervezas"
+    },
     precio: 2000,
-    imagen: "./img/cerveza01.jpg"
-
-
-  },
+    },
   {
-    id: "cerveza-01",
+    id: "cerveza-02",
     titulo: "cerveza Ipa",
     imagen:"./img/cerveza02.jpg",
+    categoria:{
+      nombre:"Cervezas",
+      id:"Cervezas"
+    },
     precio: 2000
-
   },
   {
-    id: "cervezas-01",
+    id: "cervezas-03",
     titulo: "cerveza Roja",
     imagen:"./img/patagonia.jpg",
+    categoria:{
+      nombre:"Cervezas",
+      id:"Cervezas"
+    },
     precio: 2000
-
   },
   {
-    id: "cervezas-01",
+    id: "cervezas-04",
     titulo: "cerveza stout",
     imagen: "./img/Stout01.png",
+    categoria:{
+      nombre:"Cervezas",
+      id:"Cervezas"
+    },
     precio: 2000
-
   },
   {
     id: "espumantes-01",
     titulo: "espumante 01",
     imagen:"./img/espumante01.jpg",
+    categoria:{
+      nombre:"Espumantes",
+      id:"Espumantes"
+    },
     precio: 8000
-
   },
   {
     id: "aperitivos-01",
     titulo: "fernet",
     imagen:"./img/Fernet01.jpg",
+    categoria:{
+      nombre:"Aperitivos",
+      id:"Aperitivos"
+    },
     precio: 6500
-
   },
   {
     id: "aperitivos-01",
     titulo: "Campari",
     imagen:"./img/aperitivo01.jpg",
+    categoria:{
+      nombre:"Aperitivos",
+      id:"Aperitivos"
+    },
     precio: 6500
-
   },
-];
+];*/
+let productos = [];
+fetch("./js/productos.json")
+.then(response => response.json())
+.then(data => {
+  productos = data;
+  cargarProductos(productos)
+}
+  )
+
+
 
 const contenedorProductos = document.querySelector("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
@@ -279,7 +324,7 @@ function cargarProductos(productosElegidos) {
     actualizarBotonesAgregar();
 }
 
-cargarProductos(productos);
+
 botonesCategorias.forEach(boton => {
   boton.addEventListener("click", (e) => {
 
